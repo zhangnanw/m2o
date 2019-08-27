@@ -24,6 +24,8 @@ public class Sampling implements Runnable {
     @Resource
     private Session session;
 
+    private String former = "yyyy-MM-dd HH";
+
     @Override
     public void run() {
         for (; ; ) {
@@ -49,7 +51,7 @@ public class Sampling implements Runnable {
                         "SJ",
                         "SMD");
                 List<Entity> datList = session.findAll("TAB_YLGY_SSYW");
-                String former = "yyyy-MM-dd HH";
+
                 String dataStr = DateUtil.format(new Date(),former);
                 Date date = DateUtil.parse(dataStr,former);
                 for (Entity entity : datList) {

@@ -1,6 +1,8 @@
 package com.bryer.m2o;
 
+import cn.hutool.core.thread.ThreadUtil;
 import com.bryer.m2o.running.M2O;
+import com.bryer.m2o.running.Sampling;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -16,11 +18,10 @@ public class M2oApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(M2oApplication.class,args);
-        log.info("获得Context:{}",context);
-        M2O sync = context.getBean(M2O.class);
-        log.info("获得同步对象:{}",context);
-        sync.run();
-        log.info("执行完毕");
+        M2O m2o = context.getBean(M2O.class);
+        Sampling sampling = context.getBean(Sampling.class);
+        ThreadUtil.excAsync(m2o,false);
+        ThreadUtil.excAsync(sampling,false);
     }
 
 }

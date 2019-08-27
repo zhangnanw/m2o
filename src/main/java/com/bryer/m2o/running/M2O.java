@@ -39,7 +39,7 @@ public class M2O implements Runnable {
     }
 
     private void importData() throws SQLException {
-        List<Entity> srcDatList = srcSession.query("SELECT * FROM data_result");
+        List<Entity> srcDatList = srcSession.query("SELECT * FROM data_result where stlx='001'");
         for (Entity srcDat : srcDatList) {
             Entity destDat = map(srcDat);
             destSession.insertOrUpdate(destDat,"DWDM","YGDM");
@@ -49,10 +49,15 @@ public class M2O implements Runnable {
     private Entity map(Entity dat) {
         Entity res = new Entity();
         res.setTableName("TAB_YLGY_SSYW");
+        //单位代码
         res.set("DWDM",dat.get("dwdm"));
+        //油罐代码
         res.set("YGDM",dat.get("stbm"));
+        //时间
         res.set("SJ",dat.get("c_date"));
+        //油罐高度
         res.set("YWGD",dat.getDouble("data1"));
+        //水高
         res.set("SG",dat.getDouble("data2"));
         res.set("WD",dat.getDouble("data3"));
         res.set("WD_SC",dat.getDouble("data3"));
@@ -60,8 +65,11 @@ public class M2O implements Runnable {
         res.set("WD_XC",dat.getDouble("data3"));
         res.set("TJ",dat.getDouble("data5"));
         res.set("MD",dat.getDouble("data7"));
+        res.set("SMD",dat.getDouble("data6"));
         res.set("ZL",dat.getDouble("data8"));
         res.set("KRJ",dat.getDouble("data9"));
         return res;
     }
+
+
 }

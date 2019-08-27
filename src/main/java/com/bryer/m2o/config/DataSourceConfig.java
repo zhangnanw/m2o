@@ -46,10 +46,11 @@ public class DataSourceConfig {
     public DataSource localMysqlDataSource() throws IOException, PropertyVetoException {
         ComboPooledDataSource ds = new ComboPooledDataSource();
         ds.setDriverClass("com.mysql.jdbc.Driver");
-        ds.setJdbcUrl("jdbc:mysql://" + StrUtil.trim(prop.getProperty("src"," 192.168.177.1")) + ":3306/" +
-                StrUtil.trim(prop.getProperty("src-name","DM_Conf")) + "?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&useSSL=false");
-        ds.setUser("root");
-        ds.setPassword("qwert!234");
+        ds.setJdbcUrl("jdbc:mysql://" +
+                StrUtil.trim(prop.getProperty("src")) + ":3306/" +
+                StrUtil.trim(prop.getProperty("src-name")) + "?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&useSSL=false");
+        ds.setUser(prop.getProperty("src-user"));
+        ds.setPassword(prop.getProperty("src-pwd"));
         System.out.println("源数据库URL:" + ds.getJdbcUrl());
         return ds;
     }
@@ -57,17 +58,15 @@ public class DataSourceConfig {
     @Bean
     @Qualifier("localOracleDataSource")
     public DataSource localOracleDataSource() throws IOException, PropertyVetoException, SQLException {
-//        ComboPooledDataSource ds = new ComboPooledDataSource();
-        String jdbcURL = "jdbc:oracle:thin:@" + StrUtil.trim(prop.getProperty("dest"," 192.168.177.110")) + ":1521:" +
-                StrUtil.trim(prop.getProperty("dest-name","xe"));
+        String jdbcURL = "jdbc:oracle:thin:@" +
+                StrUtil.trim(prop.getProperty("dest")) + ":1521:" +
+                StrUtil.trim(prop.getProperty("dest-name"));
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
         ds.setUrl(jdbcURL);
-        ds.setUsername("jygc");
-        ds.setPassword("jygc");
+        ds.setUsername(prop.getProperty("dest-user"));
+        ds.setPassword(prop.getProperty("dest-pwd"));
         System.out.println("目标数据库URL:" + ds.getUrl());
-
-
 //        OracleConnectionPoolDataSource ds = new OracleConnectionPoolDataSource();
 //        ds.setURL("jdbc:oracle:thin:@" + StrUtil.trim(prop.getOrDefault("dest"," 192.168.177.110").toString()) + ":1521:xe");
 //        ds.setUser("jygc");

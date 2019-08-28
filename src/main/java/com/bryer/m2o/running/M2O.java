@@ -59,14 +59,23 @@ public class M2O implements Runnable {
         res.set("YWGD",dat.getDouble("data1"));
         //水高
         res.set("SG",dat.getDouble("data2"));
+        //温度
         res.set("WD",dat.getDouble("data3"));
+        //上层温度
         res.set("WD_SC",dat.getDouble("data3"));
+        //中层温度
         res.set("WD_ZC",dat.getDouble("data3"));
+        //下层温度
         res.set("WD_XC",dat.getDouble("data3"));
+        //体积
         res.set("TJ",dat.getDouble("data5"));
+        //密度
         res.set("MD",dat.getDouble("data7"));
+        //视密度
         res.set("SMD",dat.getDouble("data6"));
+        //质量
         res.set("ZL",dat.getDouble("data8"));
+        //库容积
         res.set("KRJ",dat.getDouble("data9"));
         return res;
     }

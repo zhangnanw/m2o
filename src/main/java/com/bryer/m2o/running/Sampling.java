@@ -55,6 +55,7 @@ public class Sampling implements Runnable {
                 String dataStr = DateUtil.format(new Date(),former);
                 Date date = DateUtil.parse(dataStr,former);
                 for (Entity entity : datList) {
+                    entity.set("JCSJ",entity.get("SJ"));
                     entity.setTableName("TAB_YLGY_LSYGKC");
                     entity.set("SJ",date);
                     List<String> removeList = entity.getFieldNames().stream().filter(f -> !fieldList.contains(f)).collect(Collectors.toList());

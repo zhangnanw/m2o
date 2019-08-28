@@ -61,6 +61,7 @@ public class DataSourceConfig {
         String jdbcURL = "jdbc:oracle:thin:@" +
                 StrUtil.trim(prop.getProperty("dest")) + ":1521:" +
                 StrUtil.trim(prop.getProperty("dest-name"));
+        System.out.println("ORA JDBC_URL\t=\t" + jdbcURL);
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
         ds.setUrl(jdbcURL);

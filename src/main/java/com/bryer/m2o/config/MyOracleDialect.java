@@ -46,7 +46,8 @@ public class MyOracleDialect extends OracleDialect {
 
     private static PreparedStatement fillParams(PreparedStatement ps,Object... params) throws SQLException {
         if (ArrayUtil.isEmpty(params)) {
-            return ps;// 无参数
+            // 无参数
+            return ps;
         }
         Object param;
         for (int i = 0; i < params.length; i++) {
